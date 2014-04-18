@@ -1,0 +1,34 @@
+{
+  "name": "ParseLocal",
+  "version": "0.0.1",
+  "description": "A Parse Cloud local dev environment",
+  "main": "index.js",
+  "dependencies": {
+    "parse": "~1.2.13",
+    "ejs": "~1.0.0",
+    "express": "~3.5.1",
+    "jade": "~1.3.1",
+    "moment": "~2.6.0",
+    "underscore": "~1.6.0",
+    "parse-express-https-redirect": "git://github.com/flovilmart/parse-express-https-redirect.git",
+    "stripe": "git://github.com/flovilmart/stripe-node.git",
+    "parse-express-cookie-session": "git://github.com/flovilmart/parse-express-cookie-session.git"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:flovilmart/parse-env.git"
+  },
+  "keywords": [
+    "parse",
+    "cloud"
+  ],
+  "author": "Florent Vilmart",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/flovilmart/parse-env/issues"
+  }
+}
