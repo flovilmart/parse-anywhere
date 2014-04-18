@@ -1,6 +1,9 @@
+XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+Buffer = require("buffer").Buffer;
 Parse = require("Parse").Parse;
+_ = Parse._;
 Parse.Cloud = {};
-Parse.Cloud.job = Parse.Cloud.define = Parse.Cloud.beforeSave = Parse.Cloud.afterSave = Parse.Cloud.httpRequest = function(){};
+Parse.Cloud.job = Parse.Cloud.define = Parse.Cloud.beforeSave = Parse.Cloud.afterSave = function(){};
 
 Parse.Cloud.httpRequest = require("./httpRequest");
 

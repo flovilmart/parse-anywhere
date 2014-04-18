@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 PARSE_APP=$1
 PARSE_APP_NAME=$2
 PWD=$(pwd);
