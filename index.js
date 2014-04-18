@@ -2,6 +2,8 @@ Parse = require("Parse").Parse;
 Parse.Cloud = {};
 Parse.Cloud.job = Parse.Cloud.define = Parse.Cloud.beforeSave = Parse.Cloud.afterSave = Parse.Cloud.httpRequest = function(){};
 
+Parse.Cloud.httpRequest = require("./httpRequest");
+
 Parse.Cloud._expressCookieEncryptionKey = function(){
 	return "This is a super secure encryption key";
 }

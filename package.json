@@ -1,5 +1,5 @@
 {
-  "name": "ParseLocal",
+  "name": "parse-env",
   "version": "0.0.1",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
@@ -12,7 +12,8 @@
     "underscore": "~1.6.0",
     "parse-express-https-redirect": "git://github.com/flovilmart/parse-express-https-redirect.git",
     "stripe": "git://github.com/flovilmart/stripe-node.git",
-    "parse-express-cookie-session": "git://github.com/flovilmart/parse-express-cookie-session.git"
+    "parse-express-cookie-session": "git://github.com/flovilmart/parse-express-cookie-session.git",
+    "xmlhttprequest": "~1.6.0"
   },
   "devDependencies": {},
   "scripts": {
