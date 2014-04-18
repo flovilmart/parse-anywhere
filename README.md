@@ -64,6 +64,7 @@ How to use
 
 `./parse-env path-to-your-parse-app [app name]`
 
-where path-to-your-parse-app is the full path to your parse app root folder and app name is an optional application name in your global/config.json file
+where path-to-your-parse-app is the full path to your parse app root folder with
+a trailing / and app name is an optional application name in your global/config.json file
 
 Happy parsing!
