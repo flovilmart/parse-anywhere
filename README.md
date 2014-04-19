@@ -48,19 +48,38 @@ and you're done!
 
 ###Installation
 
+Install globally for availabilty system wide
+
+#####With npm
+	
+	npm install git://github.com/flovilmart/parse-env.git -g
+	
+
+#####From source:
 
 clone the repo in your favorite place:
 
 	git clone git://github.com/flovilmart/parse-env.git
 	cd parse-env
-	npm install
+	npm install -g
 	
 That will install the local parse environment wrapper in the parse-env directory
 
 How to use
 ======
 
-####IN THE FOLDER WHERE YOU CLONED PARSE-ENV
+#### In your parse app folder
+
+instead of running `parse develop [app name]`, your can now run `parse-env [app name]`
+
+app name is optional
+
+#### From any folder
+
+run `parse-env path-to-your-parse-app [app name]`
+
+
+####For non global installations, in your cloned directory
 
 `./parse-env path-to-your-parse-app [app name]`
 
@@ -68,3 +87,16 @@ where path-to-your-parse-app is the full path to your parse app root folder with
 a trailing / and app name is an optional application name in your global/config.json file
 
 Happy parsing!
+
+
+Change Log
+=========
+
+#####0.0.2:
+
+Ability to install system wide
+
+#####0.0.1:
+
+Proof of concept
+

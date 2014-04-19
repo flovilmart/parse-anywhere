@@ -1,6 +1,6 @@
 {
   "name": "parse-env",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "dependencies": {
