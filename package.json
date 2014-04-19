@@ -27,6 +27,9 @@
     "parse",
     "cloud"
   ],
+  "bin": {
+    "parse-env": "./parse-env",
+  },
   "author": "Florent Vilmart",
   "license": "BSD",
   "bugs": {
