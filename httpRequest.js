@@ -107,6 +107,7 @@ module.exports = function(options){
           httpResponse.headers = xhr.getAllResponseHeaders();
           httpResponse.buffer = new Buffer(xhr.responseText);
           httpResponse.cookies = xhr.getResponseHeader("set-cookie");
+          httpResponse.text = xhr.responseText;
           try {
             httpResponse.data = JSON.parse(xhr.responseText);
           } catch (e) {
