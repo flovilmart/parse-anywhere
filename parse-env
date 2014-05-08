@@ -22,7 +22,8 @@ var spawn = require('child_process').spawn;
 var env = process.env;
 env.NODE_PATH=__dirname+":"+c.path+":"+__dirname+"/node_modules";
 env.PARSE_APP_DIRECTORY="./";
+env.PATH=(__dirname+"/node_modules/.bin")+":"+env.PATH
 //console.log(env);
 //spawn("node", ["-e", "console.log(process.env); require('"+__dirname+"/index')"], {'stdio': 'inherit', env: env });
 //"--watchDirectory", "./", "--watchIgnore", ".*","-w"
-spawn("forever", ["-v", "-w", "--watchDirectory", c.path, __dirname+"/index.js", c.path, c.app], {'stdio': 'inherit', env: env });
+spawn("forever", ["-v", "-w", "--minUptime", "1000ms", "--spinSleepTime", "1000ms", "--watchDirectory", c.path, __dirname+"/index.js", c.path, c.app], {'stdio': 'inherit', env: env });
