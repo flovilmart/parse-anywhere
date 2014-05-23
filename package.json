@@ -1,6 +1,6 @@
 {
   "name": "parse-env",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "dependencies": {
@@ -10,6 +10,7 @@
     "jade": "~0.28.2",
     "moment": "~1.7.2",
     "underscore": "~1.4.2",
+    "parse-image": "git://github.com/flovilmart/parse-image.git",
     "parse-express-raw-body": "git://github.com/flovilmart/parse-express-raw-body.git",
     "parse-express-https-redirect": "git://github.com/flovilmart/parse-express-https-redirect.git",
     "stripe": "git://github.com/flovilmart/stripe-node.git",
