@@ -49,6 +49,8 @@ and you're done!
 ###Installation
 
 Install globally for availabilty system wide
+Starting version 0.0.6, you'll need homebrew to install hard dependencies for
+the parse-image module
 
 #####With npm
 	
@@ -91,6 +93,9 @@ Happy parsing!
 
 Change Log
 =========
+
+#####0.0.6:
+Adds support for parse-image cloud module
 
 #####0.0.2:
 
