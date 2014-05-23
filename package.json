@@ -1,6 +1,6 @@
 {
-  "name": "parse-env",
-  "version": "0.0.4",
+  "name": "parse-develop",
+  "version": "0.0.5",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "dependencies": {
@@ -24,18 +24,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:flovilmart/parse-env.git"
+    "url": "git@github.com:flovilmart/parse-develop.git"
   },
   "keywords": [
     "parse",
     "cloud"
   ],
   "bin": {
+    "parse-develop": "./parse-env",
     "parse-env": "./parse-env"
   },
   "author": "Florent Vilmart",
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/flovilmart/parse-env/issues"
+    "url": "https://github.com/flovilmart/parse-develop/issues"
   }
 }

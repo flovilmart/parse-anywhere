@@ -1,4 +1,4 @@
-parse-env
+parse-develop
 =========
 
 A local parse environment 
@@ -49,41 +49,39 @@ and you're done!
 ###Installation
 
 Install globally for availabilty system wide
-Starting version 0.0.6, you'll need homebrew to install hard dependencies for
-the parse-image module
 
 #####With npm
 	
-	npm install git://github.com/flovilmart/parse-env.git -g
-	
+	npm install git://github.com/flovilmart/parse-develop.git -g
+	npm install parse-develop
 
 #####From source:
 
 clone the repo in your favorite place:
 
-	git clone git://github.com/flovilmart/parse-env.git
-	cd parse-env
+	git clone git://github.com/flovilmart/parse-develop.git
+	cd parse-develop
 	npm install -g
 	
-That will install the local parse environment wrapper in the parse-env directory
+That will install the local parse environment wrapper in the parse-develop directory
 
 How to use
 ======
 
 #### In your parse app folder
 
-instead of running `parse develop [app name]`, your can now run `parse-env [app name]`
+instead of running `parse develop [app name]`, your can now run `parse-develop [app name]`
 
 app name is optional
 
 #### From any folder
 
-run `parse-env path-to-your-parse-app [app name]`
+run `parse-develop path-to-your-parse-app [app name]`
 
 
 ####For non global installations, in your cloned directory
 
-`./parse-env path-to-your-parse-app [app name]`
+`./parse-develop path-to-your-parse-app [app name]`
 
 where path-to-your-parse-app is the full path to your parse app root folder with
 a trailing / and app name is an optional application name in your global/config.json file
@@ -94,8 +92,11 @@ Happy parsing!
 Change Log
 =========
 
-#####0.0.6:
-Adds support for parse-image cloud module
+#####0.0.5:
+Changes for NPM to parse-develop
+
+#####0.0.4:
+Adds support for parse-image
 
 #####0.0.2:
 
