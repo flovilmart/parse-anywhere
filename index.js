@@ -1,6 +1,6 @@
 XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 Buffer = require("buffer").Buffer;
-Parse = require("Parse").Parse;
+Parse = require("parse").Parse;
 _ = Parse._;
 Parse.Cloud = {};
 Parse.Cloud.job = Parse.Cloud.define = Parse.Cloud.beforeSave =
