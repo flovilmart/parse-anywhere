@@ -13,13 +13,14 @@ Parse.Cloud._expressCookieEncryptionKey = function(){
 }
 
 Parse.User.prototype.getSessionToken = function(){
-    console.log("ST: ", this._sessionToken);
     return this._sessionToken;
 }
 
 global.Parse = Parse
 var appName = process.argv[3];
-console.log("Starting app "+appName);
+if (appName) {
+    console.log("Starting app "+appName);
+}
 var path = process.argv[2];
 fs = require('fs');
 fs.readFile(path+"config/global.json", 'utf8', function (err,data) {
