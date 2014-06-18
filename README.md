@@ -91,6 +91,8 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.8:
+Adds npm for parse-image instead of git
 
 #####0.0.5:
 Changes for NPM to parse-develop
