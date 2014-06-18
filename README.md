@@ -91,6 +91,10 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.9:
+Adds npm for all parse-* modules instead of git
+Moves stripe-node fork to flovilmart/parse-stripe
+
 #####0.0.8:
 Adds npm for parse-image instead of git
 

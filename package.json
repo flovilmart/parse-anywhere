@@ -1,6 +1,6 @@
 {
   "name": "parse-develop",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "dependencies": {
@@ -9,12 +9,12 @@
     "forever": "~0.11.0",
     "jade": "~0.28.2",
     "moment": "~1.7.2",
-    "parse": "~1.2.13",
-    "parse-express-cookie-session": "git://github.com/flovilmart/parse-express-cookie-session.git",
-    "parse-express-https-redirect": "git://github.com/flovilmart/parse-express-https-redirect.git",
-    "parse-express-raw-body": "git://github.com/flovilmart/parse-express-raw-body.git",
+    "parse": "~1.2.17",
+    "parse-express-cookie-session": "0.0.3",
+    "parse-express-https-redirect": "0.0.1",
+    "parse-express-raw-body": "0.0.1",
     "parse-image": "~0.0.3",
-    "stripe": "git://github.com/flovilmart/stripe-node.git",
+    "parse-stripe": "flovilmart/parse-stripe",
     "underscore": "~1.4.2",
     "xmlhttprequest": "~1.6.0"
   },
