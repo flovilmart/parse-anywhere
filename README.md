@@ -91,6 +91,12 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.13
+Adds prefer global directive
+
+Removes unused code
+
+
 #####0.0.12
 Reverts parse-stripe dependency to full git url
 

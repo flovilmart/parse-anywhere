@@ -18,7 +18,6 @@ var processArgs = function(args){
 var c = processArgs(args);
 
 var spawn = require('child_process').spawn;
-var exec = require('child_process').exec;
 var which = require("which").sync;
 var cmd = which("forever");
 var env = process.env;
@@ -45,16 +44,6 @@ require("./lib/utils").getConfiguration(c.path, c.app, function(err, keys){
 		foreverArgs.push(c.app)
 		// Configuration
 		foreverArgs.push(JSON.stringify(keys));
-        /*var cmd = "forever "+foreverArgs.join(" ");
-        console.log(cmd);
-        exec(cmd, {env: env}, function(error,stdout, stderr){
-			console.log('stdout: ' + stdout);
-    		console.log('stderr: ' + stderr);
-		    if (error !== null) {
-		      console.log('exec error: ' + error);
-		    }
-		});*/
-		console.log(cmd);
 		spawn(cmd, foreverArgs, {'stdio': 'inherit', env: env });
 	}
 });
