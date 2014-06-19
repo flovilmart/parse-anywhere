@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-var args = process.argv.slice(2);
+var spawn = require('child_process').spawn;
+var path = require("path");
+var pargs = process.argv.slice(2);
 
-var processArgs = function(args){
+var options = (function(args){
 	var r = {path: "./"};
 	while(args.length){
 		var a = args.shift();
@@ -13,37 +15,33 @@ var processArgs = function(args){
 		}
 	}
 	return r;
-}
+})(pargs);
 
-var c = processArgs(args);
+options.path = path.resolve(options.path)
+var cmd = path.join(__dirname,"node_modules",".bin","forever");
 
-var spawn = require('child_process').spawn;
-var which = require("which").sync;
-var cmd = which("forever");
-var env = process.env;
-// Add the proper elements to the environment
-env.NODE_PATH=__dirname+":"+c.path+":"+__dirname+"/node_modules";
-//env.PARSE_APP_DIRECTORY=c.path;
-env.PATH=(__dirname+"/node_modules/.bin")+":"+env.PATH;
-require("./lib/utils").getConfiguration(c.path, c.app, function(err, keys){
+process.env.NODE_PATH= [__dirname, options.path, path.join(__dirname,"node_modules") ].join(path.delimiter);
+console.log(process.env.NODE_PATH);
+require("./lib/utils").getConfiguration(options.path, options.app, function(err, keys){
 	if (err) {
 		console.error(err);
 		process.exit(0);
 	}else{
-		var foreverArgs = ["-v", "-w", "--minUptime", "1000ms", "--spinSleepTime", "1000ms"];
-		if (typeof env.DEBUG !== "undefined") {
-			console.log("DEBUG MODE...");
+		var foreverArgs = ["--minUptime", "5000ms", "--spinSleepTime", "5000ms", "--colors"];
+		if (typeof process.env.DEBUG !== "undefined") {
+			console.log("Debug mode...");
 			foreverArgs.push("-c","node --debug");
 		}
-		foreverArgs.push("--watchDirectory", c.path);
+		foreverArgs.push("--watchDirectory", options.path);
 		// Launch Script
-		foreverArgs.push(__dirname+"/index.js")
+		foreverArgs.push(path.join(__dirname, "index.js"));
 		// Launch Path
-		foreverArgs.push(c.path)
+		foreverArgs.push(options.path)
 		// App Name
-		foreverArgs.push(c.app)
+		foreverArgs.push(options.app)
 		// Configuration
 		foreverArgs.push(JSON.stringify(keys));
-		spawn(cmd, foreverArgs, {'stdio': 'inherit', env: env });
+
+		spawn(cmd, foreverArgs, {'stdio': 'inherit', env: process.env });
 	}
 });

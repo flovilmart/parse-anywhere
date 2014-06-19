@@ -91,6 +91,13 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.15
+Removes dependency on parse
+
+Adds dependency on parse-cloud-additions
+
+Improves path handling for non *NIX machines
+
 #####0.0.13
 Adds prefer global directive
 

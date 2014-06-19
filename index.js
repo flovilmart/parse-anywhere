@@ -1,16 +1,8 @@
-Parse = require("parse").Parse;
-Parse.Cloud = {};
-Parse.Cloud.job = Parse.Cloud.define = Parse.Cloud.beforeSave =
-Parse.Cloud.afterSave = Parse.Cloud.beforeDelete = Parse.Cloud.afterDelete = function(){};
-Parse.Cloud.httpRequest = require("./lib/httpRequest");
-Parse.Cloud._expressCookieEncryptionKey = function(){
-	return "This is a super secure encryption key";
-}
-Parse.User.prototype.getSessionToken = function(){
-    return this._sessionToken;
-}
 
-global.Parse = Parse
+
+Parse = require("parse-cloud-additions").Parse;
+
+global.Parse = Parse;
 
 var appName = process.argv[3];
 if (appName && appName !== "undefined") {
