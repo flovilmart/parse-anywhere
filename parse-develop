@@ -18,30 +18,59 @@ var options = (function(args){
 })(pargs);
 
 options.path = path.resolve(options.path)
-var cmd = path.join(__dirname,"node_modules",".bin","forever");
 
-process.env.NODE_PATH= [__dirname, options.path, path.join(__dirname,"node_modules") ].join(path.delimiter);
-console.log(process.env.NODE_PATH);
+var forever = "forever";
+var launcherPath = path.join(__dirname, "index.js");
+var modulesPath = path.join(__dirname,"node_modules");
+if (process.platform === "win32"){
+	// Change to forever.cmd
+	forever = "forever.cmd";
+	// Windows retains the S**T paths...
+	launcherPath = path.relative(process.cwd(), launcherPath);
+	modulesPath = path.relative(process.cwd(), modulesPath);
+}
+
+
+
+// Absolute cmd path
+var cmd = path.join(__dirname,"node_modules",".bin",forever);
+
+// Node environment
+process.env.NODE_PATH= [__dirname, options.path, modulesPath, process.env.NODE_PATH].join(path.delimiter);
+
 require("./lib/utils").getConfiguration(options.path, options.app, function(err, keys){
 	if (err) {
+		// Configuration not found...
 		console.error(err);
 		process.exit(0);
 	}else{
-		var foreverArgs = ["--minUptime", "5000ms", "--spinSleepTime", "5000ms", "--colors"];
+		var foreverArgs = ["-v","--minUptime", "1000", "--spinSleepTime","500", "--colors"];
+		foreverArgs.push("-m","1");
+		// Watch the path...
+		console.log("Watching "+options.path);
+		foreverArgs.push("-w","--watchDirectory", options.path);
+		// Launch Script
+		
+		// Setup debug mode
 		if (typeof process.env.DEBUG !== "undefined") {
 			console.log("Debug mode...");
 			foreverArgs.push("-c","node --debug");
+		}else if(process.platform === "win32"){
+			// Force forever to use node on win32 systems
+			foreverArgs.push("-c", "node");
 		}
-		foreverArgs.push("--watchDirectory", options.path);
-		// Launch Script
-		foreverArgs.push(path.join(__dirname, "index.js"));
-		// Launch Path
+
+		// Launch script path
+		foreverArgs.push(launcherPath);
+
+		// Parse App Path
 		foreverArgs.push(options.path)
-		// App Name
+		// Parse App Name
 		foreverArgs.push(options.app)
 		// Configuration
 		foreverArgs.push(JSON.stringify(keys));
-
+		
+		// Let's GO!
 		spawn(cmd, foreverArgs, {'stdio': 'inherit', env: process.env });
 	}
 });

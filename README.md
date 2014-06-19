@@ -91,6 +91,14 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.20
+Add Windows Support!
+
+Fixes crazy restart loops when addr in use
+
+Improves overall performance
+
+
 #####0.0.15
 Removes dependency on parse
 
