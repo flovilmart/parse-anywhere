@@ -91,6 +91,12 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.12
+Reverts parse-stripe dependency to full git url
+
+Adds which as a dependency for forever full path
+
+
 #####0.0.11
 Set the DEBUG environment variable to start the process node --debug so you can
 use node-inspector or any other debugger!
