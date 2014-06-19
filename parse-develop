@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+var args = process.argv.slice(2);
+
+var processArgs = function(args){
+	var r = {path: "./"};
+	while(args.length){
+		var a = args.shift();
+		if (a.indexOf("/") > -1) {
+			r.path = a;
+		}else{
+			r.app = a;
+		}
+	}
+	return r;
+}
+
+var c = processArgs(args);
+
+var spawn = require('child_process').spawn;
+
+var env = process.env;
+// Add the proper elements to the environment
+env.NODE_PATH=__dirname+":"+c.path+":"+__dirname+"/node_modules";
+//env.PARSE_APP_DIRECTORY=c.path;
+env.PATH=(__dirname+"/node_modules/.bin")+":"+env.PATH;
+require("./lib/utils").getConfiguration(c.path, c.app, function(err, keys){
+	if (err) {
+		console.error(err);
+		process.exit(0);
+	}else{
+		var foreverArgs = ["-v", "-w", "--minUptime", "1000ms", "--spinSleepTime", "1000ms"];
+		if (typeof env.DEBUG !== "undefined") {
+			console.log("DEBUG MODE...");
+			foreverArgs.push("-c","node --debug");
+		}
+		foreverArgs.push("--watchDirectory", c.path);
+		// Launch Script
+		foreverArgs.push(__dirname+"/index.js")
+		// Launch Path
+		foreverArgs.push(c.path)
+		// App Name
+		foreverArgs.push(c.app)
+		// Configuration
+		foreverArgs.push(JSON.stringify(keys));
+
+		spawn("forever", foreverArgs, {'stdio': 'inherit', env: env });
+	}
+});

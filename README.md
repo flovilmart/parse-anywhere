@@ -91,8 +91,27 @@ Happy parsing!
 
 Change Log
 =========
+#####0.0.11
+Set the DEBUG environment variable to start the process node --debug so you can
+use node-inspector or any other debugger!
+
+Displays the PID upon launch
+
+
+#####0.0.10
+Improves forever restarting craziness
+
+Adds sanity check of the configuration file before starting forever
+
+Improves reliability
+
+!! Don't seem to be able to find the views when launched outside of the parse
+folder
+
+
 #####0.0.9:
 Adds npm for all parse-* modules instead of git
+
 Moves stripe-node fork to flovilmart/parse-stripe
 
 #####0.0.8:
