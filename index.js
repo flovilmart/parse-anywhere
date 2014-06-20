@@ -10,9 +10,9 @@ if (appName && appName !== "undefined") {
 }
 
 var start = function(config){
-    console.log("["+process.pid+"] Running...");
+    console.log("[%s] Running...", process.pid);
     Parse.initialize(config.applicationId,config.javascriptKey,config.masterKey);
-    require("cloud/main.js");
+    require("cloud/main");
 }
 // 4 is the stringified config file, passed from previous script...
 if (process.argv[4]) {
