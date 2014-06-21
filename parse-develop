@@ -8,16 +8,16 @@ var pargs = process.argv.slice(2);
 var options = (function(args) {
     'use strict';
 
-	var r = {path: "./"};
-	while(args.length){
-		var a = args.shift();
-		if (a.indexOf("/") > -1) {
-			r.path = a;
-		} else {
-			r.app = a;
-		}
-	}
-	return r;
+    var r = {path: "./"};
+    while(args.length){
+        var a = args.shift();
+        if (a.indexOf("/") > -1) {
+            r.path = a;
+        } else {
+            r.app = a;
+        }
+    }
+    return r;
 })(pargs);
 
 options.path = path.resolve(options.path);
@@ -26,11 +26,11 @@ var forever = "forever";
 var launcherPath = path.join(__dirname, "index.js");
 var modulesPath = path.join(__dirname, "node_modules");
 if (process.platform === "win32") {
-	// Change to forever.cmd
-	forever = "forever.cmd";
-	// Windows retains the S**T paths...
-	launcherPath = path.relative(process.cwd(), launcherPath);
-	modulesPath = path.relative(process.cwd(), modulesPath);
+    // Change to forever.cmd
+    forever = "forever.cmd";
+    // Windows retains the S**T paths...
+    launcherPath = path.relative(process.cwd(), launcherPath);
+    modulesPath = path.relative(process.cwd(), modulesPath);
 }
 
 // Absolute cmd path
@@ -42,43 +42,43 @@ process.env.NODE_PATH= [__dirname, options.path, modulesPath, process.env.NODE_P
 require("./lib/utils").getConfiguration(options.path, options.app, function(err, keys) {
     'use strict';
 
-	if (err) {
-		// Configuration not found...
-		console.error(err);
-		process.exit(0);
-	} else {
-		var foreverArgs = [
-			"-v",
-			"--minUptime", "1000",
-			"--spinSleepTime", "500",
-			"--colors",
-			"-m", "1"
-		];
+    if (err) {
+        // Configuration not found...
+        console.error(err);
+        process.exit(0);
+    } else {
+        var foreverArgs = [
+            "-v",
+            "--minUptime", "1000",
+            "--spinSleepTime", "500",
+            "--colors",
+            "-m", "1"
+        ];
 
-		// Watch the path...
-		console.log("Watching "+options.path);
-		foreverArgs.push("-w","--watchDirectory", options.path);
-		
-		// Setup debug mode
-		if (typeof process.env.DEBUG !== "undefined") {
-			console.log("Debug mode...");
-			foreverArgs.push("-c", "node --debug");
-		} else if (process.platform === "win32") {
-			// Force forever to use node on win32 systems
-			foreverArgs.push("-c", "node");
-		}
+        // Watch the path...
+        console.log("Watching "+options.path);
+        foreverArgs.push("-w","--watchDirectory", options.path);
+        
+        // Setup debug mode
+        if (typeof process.env.DEBUG !== "undefined") {
+            console.log("Debug mode...");
+            foreverArgs.push("-c", "node --debug");
+        } else if (process.platform === "win32") {
+            // Force forever to use node on win32 systems
+            foreverArgs.push("-c", "node");
+        }
 
-		// Launch script path
-		foreverArgs.push(launcherPath);
+        // Launch script path
+        foreverArgs.push(launcherPath);
 
-		// Parse App Path
-		foreverArgs.push(options.path);
-		// Parse App Name
-		foreverArgs.push(options.app);
-		// Configuration
-		foreverArgs.push(JSON.stringify(keys));
-		
-		// Let's GO!
-		spawn(cmd, foreverArgs, {'stdio': 'inherit', env: process.env});
-	}
+        // Parse App Path
+        foreverArgs.push(options.path);
+        // Parse App Name
+        foreverArgs.push(options.app);
+        // Configuration
+        foreverArgs.push(JSON.stringify(keys));
+        
+        // Let's GO!
+        spawn(cmd, foreverArgs, {'stdio': 'inherit', env: process.env});
+    }
 });
