@@ -52,8 +52,7 @@ Install globally for availabilty system wide
 
 #####With npm
 	
-	npm install git://github.com/flovilmart/parse-develop.git -g
-	npm install parse-develop
+	npm install parse-develop -g
 
 #####From source:
 
@@ -70,13 +69,9 @@ How to use
 
 #### In your parse app folder
 
-instead of running `parse develop [app name]`, your can now run `parse-develop [app name]`
+instead of running `parse develop [app name]`, your can now run `parse-develop [app name]` or `parsedev [app name]`
 
 app name is optional
-
-#### From any folder
-
-run `parse-develop path-to-your-parse-app [app name]`
 
 
 ####For non global installations, in your cloned directory
@@ -88,9 +83,50 @@ a trailing / and app name is an optional application name in your global/config.
 
 Happy parsing!
 
+Custom Configuration
+==========
+
+Overriding the default configuration is at your own risks and may render your installation unstable, please use with care!
+
+It is possible to change the behavior of forever monitor through a rc file (we use the rc module).
+
+The appname for rc is `parsedev`
+
+Visit [RC Standards](https://github.com/dominictarr/rc#standards) for more informations
+
+All parameters of forever-monitor are available for configuration but some are automatically overriden (otherwise the whole app doesn't work)
+
+The parameters from forever-monitor that can't be changed are:
+
+`options, env, sourceDir, watchDirectory`
+
+Even if `watchDirectory` can't be overriden, you can disable `watch` by setting `watch=false`
+
+If you set `debug=1`, that will override the command parameter to `node --debug`, it has the same effect as `command="node --debug"`
+
+The default options for forever-monitor are:
+
+	{
+    	max: 1,
+    	command: "node",
+    	spawnWith: {
+     		customFds: [-1, -1, -1], // that forever spawns.
+      		setsid: false
+    	},
+    	watch:true,
+    	minUptime: 1000,
+    	spinSleepTime: 500,
+  	}
 
 Change Log
 =========
+#####0.0.30
+
+Changes to forever-monitor (recommended behavior)
+Adds parsedev command (for simplicity sake)
+Adds configuration for forever-monitor with rc (appname is parsedev)
+
+
 #####0.0.20
 Add Windows Support!
 

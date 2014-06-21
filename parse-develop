@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /*jshint node:true */
 
-var spawn = require('child_process').spawn;
 var path = require("path");
+var forever = require('forever-monitor');
+var rc = require("rc");
 var pargs = process.argv.slice(2);
 
 var options = (function(args) {
@@ -22,22 +23,30 @@ var options = (function(args) {
 
 options.path = path.resolve(options.path);
 
-var forever = "forever";
-var launcherPath = path.join(__dirname, "index.js");
+var sourceDir = __dirname;
 var modulesPath = path.join(__dirname, "node_modules");
-if (process.platform === "win32") {
-    // Change to forever.cmd
-    forever = "forever.cmd";
-    // Windows retains the S**T paths...
-    launcherPath = path.relative(process.cwd(), launcherPath);
-    modulesPath = path.relative(process.cwd(), modulesPath);
-}
 
-// Absolute cmd path
-var cmd = path.join(modulesPath, ".bin", forever);
+if (process.platform === "win32") {
+    // Windows retains the S**T paths...
+    modulesPath = path.relative(process.cwd(), modulesPath);
+    sourceDir = path.relative(process.cwd(), sourceDir);
+}
 
 // Node environment
 process.env.NODE_PATH= [__dirname, options.path, modulesPath, process.env.NODE_PATH].join(path.delimiter);
+
+var foreverConf = rc("parsedev", {
+    max: 1,
+    command: "node",
+    spawnWith: {
+      customFds: [-1, -1, -1], // that forever spawns.
+      setsid: false
+    },
+    watch:true,
+    watchDirectory: options.path,
+    minUptime: 1000,
+    spinSleepTime: 500,
+  });
 
 require("./lib/utils").getConfiguration(options.path, options.app, function(err, keys) {
     'use strict';
@@ -47,38 +56,38 @@ require("./lib/utils").getConfiguration(options.path, options.app, function(err,
         console.error(err);
         process.exit(0);
     } else {
-        var foreverArgs = [
-            "-v",
-            "--minUptime", "1000",
-            "--spinSleepTime", "500",
-            "--colors",
-            "-m", "1"
-        ];
-
-        // Watch the path...
-        console.log("Watching "+options.path);
-        foreverArgs.push("-w","--watchDirectory", options.path);
         
-        // Setup debug mode
-        if (typeof process.env.DEBUG !== "undefined") {
-            console.log("Debug mode...");
-            foreverArgs.push("-c", "node --debug");
-        } else if (process.platform === "win32") {
-            // Force forever to use node on win32 systems
-            foreverArgs.push("-c", "node");
+        if (foreverConf.debug) {
+            foreverConf.command = "node --debug";
         }
 
-        // Launch script path
-        foreverArgs.push(launcherPath);
-
-        // Parse App Path
-        foreverArgs.push(options.path);
-        // Parse App Name
-        foreverArgs.push(options.app);
-        // Configuration
-        foreverArgs.push(JSON.stringify(keys));
+        // Override the defaults
+        foreverConf.env = process.env;
+        foreverConf.options = [options.path, options.app, JSON.stringify(keys)];
+        foreverConf.sourceDir = sourceDir;
         
-        // Let's GO!
-        spawn(cmd, foreverArgs, {'stdio': 'inherit', env: process.env});
+        // Watch the path...
+        if (foreverConf.watch) {
+            console.log("Watching "+options.path);
+            foreverConf.watchDirectory = options.path;
+        }else{
+            console.log("Not watching...");
+        }
+
+        var child = new (forever.Monitor)("./index.js", foreverConf);
+
+        child.on('watch:restart', function(info) {
+            console.error('Restaring script because ' + info.file + ' changed');
+        });
+        child.on('restart', function() {
+            console.error('Forever restarting script for ' + child.times + ' time');
+        });
+
+        child.on('exit:code', function(code) {
+            console.error('Forever detected script exited with code ' + code);
+        });
+
+        // Start!
+        child.start();
     }
 });
