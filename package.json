@@ -1,10 +1,11 @@
 {
   "name": "parse-develop",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "preferGlobal": "true",
   "dependencies": {
+    "applinks-metatag": "0.0.0",
     "ejs": "~0.8.3",
     "express": "~3.1.0",
     "forever-monitor": "^1.2.3",

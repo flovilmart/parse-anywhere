@@ -120,6 +120,13 @@ The default options for forever-monitor are:
 
 Change Log
 =========
+#####0.0.31
+
+Adds applinks-metatag module for [AppLinks](https://www.parse.com/docs/cloud_modules_guide#applinks)
+
+Use require for synchronous configuration reading
+
+
 #####0.0.30
 
 Changes to forever-monitor (recommended behavior)

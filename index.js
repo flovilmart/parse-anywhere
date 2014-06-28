@@ -23,12 +23,6 @@ if (process.argv[4]) {
     start(JSON.parse(process.argv[4]));
 } else {
     var path = process.argv[2];
-    require("./lib/utils").getConfiguration(path, appName, function(err, config) {
-        'use strict';
-        if (err) {
-            return console.error(err);
-        } else {
-            start(config);
-        }
-    });
+    var keys = require("./lib/utils").getConfiguration(path, appName);
+    start(keys);
 }

@@ -48,46 +48,38 @@ var foreverConf = rc("parsedev", {
     spinSleepTime: 500,
   });
 
-require("./lib/utils").getConfiguration(options.path, options.app, function(err, keys) {
-    'use strict';
+var appKeys = require("./lib/utils").getConfiguration(options.path, options.app);
+'use strict';
 
-    if (err) {
-        // Configuration not found...
-        console.error(err);
-        process.exit(0);
-    } else {
-        
-        if (foreverConf.debug) {
-            foreverConf.command = "node --debug";
-        }
+if (foreverConf.debug) {
+    foreverConf.command = "node --debug";
+}
 
-        // Override the defaults
-        foreverConf.env = process.env;
-        foreverConf.options = [options.path, options.app, JSON.stringify(keys)];
-        foreverConf.sourceDir = sourceDir;
-        
-        // Watch the path...
-        if (foreverConf.watch) {
-            console.log("Watching "+options.path);
-            foreverConf.watchDirectory = options.path;
-        }else{
-            console.log("Not watching...");
-        }
+// Override the defaults
+foreverConf.env = process.env;
+foreverConf.options = [options.path, options.app, JSON.stringify(appKeys)];
+foreverConf.sourceDir = sourceDir;
 
-        var child = new (forever.Monitor)("./index.js", foreverConf);
+// Watch the path...
+if (foreverConf.watch) {
+    console.info("Watching "+options.path);
+    foreverConf.watchDirectory = options.path;
+}else{
+    console.info("Not watching...");
+}
 
-        child.on('watch:restart', function(info) {
-            console.error('Restaring script because ' + info.file + ' changed');
-        });
-        child.on('restart', function() {
-            console.error('Forever restarting script for ' + child.times + ' time');
-        });
+var child = new (forever.Monitor)("./index.js", foreverConf);
 
-        child.on('exit:code', function(code) {
-            console.error('Forever detected script exited with code ' + code);
-        });
-
-        // Start!
-        child.start();
-    }
+child.on('watch:restart', function(info) {
+    console.error('Restaring script because ' + info.file + ' changed');
 });
+child.on('restart', function() {
+    console.error('Forever restarting script for ' + child.times + ' time');
+});
+
+child.on('exit:code', function(code) {
+    console.error('Forever detected script exited with code ' + code);
+});
+
+// Start!
+child.start();
