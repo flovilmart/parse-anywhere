@@ -120,6 +120,10 @@ The default options for forever-monitor are:
 
 Change Log
 =========
+#####0.0.32
+
+Adds mailgun and mandrill cloud modules
+
 #####0.0.31
 
 Adds applinks-metatag module for [AppLinks](https://www.parse.com/docs/cloud_modules_guide#applinks)

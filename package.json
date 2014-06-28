@@ -1,6 +1,6 @@
 {
   "name": "parse-develop",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "preferGlobal": "true",
@@ -17,6 +17,8 @@
     "parse-express-raw-body": "0.0.1",
     "parse-image": "~0.0.4",
     "parse-stripe": "git://github.com/flovilmart/parse-stripe",
+    "mailgun": "git://github.com/flovilmart/parse-mailgun",
+    "mandrill": "git://github.com/flovilmart/parse-mandrill",
     "rc": "^0.4.0",
     "underscore": "~1.4.2"
   },
