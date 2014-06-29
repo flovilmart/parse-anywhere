@@ -12,7 +12,8 @@ if (appName && appName !== "undefined") {
 var start = function(config) {
     'use strict';
 
-    console.log("[%s] Running...", process.pid);
+    console.log("[%s] Running on http://localhost:%s/", process.pid,
+process.env.PARSEDEV_PORT);
     Parse.initialize(config.applicationId, config.javascriptKey, config.masterKey);
 
     require("cloud/main");

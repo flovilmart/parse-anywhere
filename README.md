@@ -1,52 +1,9 @@
 parse-develop
 =========
 
-A local parse environment 
-That enables using the expressjs module of parse on your local machine, so you don't need to push the code each time you iterate!
+Develop your parse powered webapps locally
 
-###What it does?
-
-Loads your cloud code modules with forever and start it!
-Supports Parse.Cloud.httpRequest
-Ignores all other Parse.Cloud functions
-
-###Limitations:
-- Doesn't push your cloud functions, beforeSave, afterSave, beforeDelete, afterDelete etc...
-- A few changes are required in your code, don't worry, nothing that breaks anything
-
-
-##Prepare your project:
-
-in you config/global.json
-
-add your javascriptKey:
-
-	{
-		"applications":{
-			"myApp": {
-				"applicationId": "MYAPP_ID",
-				"masterKey" : "MY_MASTER_KEY",
-				"javascriptKey": "SET YOUR JS KEY HERE!"
-			}
-		} 
-	}
-
-Where you call `app.listen()`
-
-	// Setup the public folder for your static files
-	try{
-		app.use(express.static(__dirname + '/../public'));
-	}catch(e){
-	
-	}
-	// Set the port to 3000 or whatever you like
-	// It has no effect in production on Parse servers
-	app.listen(3000);
-
-
-and you're done!
-
-###Installation
+##Installation
 
 Install globally for availabilty system wide
 
@@ -64,29 +21,59 @@ clone the repo in your favorite place:
 	
 That will install the local parse environment wrapper in the parse-develop directory
 
-How to use
-======
+##Prepare your project:
 
-#### In your parse app folder
+in you config/global.json
 
+add your javascriptKey:
+
+	{
+		"applications":{
+			"myApp": {
+				"applicationId": "MYAPP_ID",
+				"masterKey" : "MY_MASTER_KEY",
+				"javascriptKey": "SET YOUR JS KEY HERE!"
+			}
+		} 
+	}
+
+and you're done!
+
+
+###Limitations:
+As you know, Parse provide hooks (beforeSave, afterSave, beforeDelete, afterDelete) and define functions. 
+
+Those functions have to be uploaded to the Parse servers using `parse deploy` or `parse develop`. 
+
+Updating those functions locally without publishing your code to parse have no effect!
+
+
+
+##How to use
+
+From your parse cloud app folder, 
 instead of running `parse develop [app name]`, your can now run `parse-develop [app name]` or `parsedev [app name]`
 
 app name is optional
 
-
-####For non global installations, in your cloned directory
-
-`./parse-develop path-to-your-parse-app [app name]`
-
-where path-to-your-parse-app is the full path to your parse app root folder with
-a trailing / and app name is an optional application name in your global/config.json file
-
 Happy parsing!
 
-Custom Configuration
-==========
+##Supported parse-provided cloud modules 
+ 
+- applinks
+- mailgun
+- mandrill
+- sendgrid
+- stripe
+- parse-image
+- twilio
+
+
+##Custom Configuration
+
 
 Overriding the default configuration is at your own risks and may render your installation unstable, please use with care!
+
 
 It is possible to change the behavior of forever monitor through a rc file (we use the rc module).
 
@@ -104,9 +91,10 @@ Even if `watchDirectory` can't be overriden, you can disable `watch` by setting 
 
 If you set `debug=1`, that will override the command parameter to `node --debug`, it has the same effect as `command="node --debug"`
 
-The default options for forever-monitor are:
+The default options for are:
 
 	{
+		// Forever monitor options
     	max: 1,
     	command: "node",
     	spawnWith: {
@@ -116,10 +104,41 @@ The default options for forever-monitor are:
     	watch:true,
     	minUptime: 1000,
     	spinSleepTime: 500,
+    	
+    	// expressjs port
+    	port: 3000
   	}
 
-Change Log
-=========
+##Change Log
+
+#####0.0.50
+Adds support for all Parse Cloud modules provided by parse
+
+Base modules
+
+- [express (custom version)](https://github.com/flovilmart/express/tree/3.1.0-parse)
+- ejs
+- moment
+- buffer
+- http
+- jade
+- underscore
+
+Custom Cloud modules
+
+- applinks
+- mailgun
+- mandrill
+- sendgrid
+- stripe
+- parse-image
+- twilio
+
+Removes necessity to pass a port to `app.listen`
+
+Removes necessity to add your public cloud directory
+
+
 #####0.0.32
 
 Adds mailgun and mandrill cloud modules
