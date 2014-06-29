@@ -1,7 +1,7 @@
 /*jshint node:true */
 
 // Load Parse
-var Parse = require("parse-cloud-additions").Parse;
+var Parse = require("parse-cloud").Parse;
 global.Parse = Parse;
 
 var appName = process.argv[3];
