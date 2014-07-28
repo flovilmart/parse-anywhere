@@ -1,6 +1,6 @@
 {
   "name": "parse-develop",
-  "version": "0.0.53",
+  "version": "0.0.54",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "preferGlobal": "true",
