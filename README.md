@@ -27,15 +27,17 @@ in you config/global.json
 
 add your javascriptKey:
 
-	{
-		"applications":{
-			"myApp": {
-				"applicationId": "MYAPP_ID",
-				"masterKey" : "MY_MASTER_KEY",
-				"javascriptKey": "SET YOUR JS KEY HERE!"
-			}
-		} 
-	}
+```javascript
+{
+	"applications":{
+		"myApp": {
+			"applicationId": "MYAPP_ID",
+			"masterKey" : "MY_MASTER_KEY",
+			"javascriptKey": "SET YOUR JS KEY HERE!"
+		}
+	} 
+}
+```
 
 and you're done!
 
