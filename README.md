@@ -21,23 +21,10 @@ clone the repo in your favorite place:
 	
 That will install the local parse environment wrapper in the parse-develop directory
 
-##Prepare your project:
+##Prepare your environment:
 
-in you config/global.json
-
-add your javascriptKey:
-
-	{
-		"applications":{
-			"myApp": {
-				"applicationId": "MYAPP_ID",
-				"masterKey" : "MY_MASTER_KEY",
-				"javascriptKey": "SET YOUR JS KEY HERE!"
-			}
-		} 
-	}
-
-and you're done!
+export PARSE_JAVASCRIPT_KEY="myJSKey...."
+export PARSE_MASTER_KEY="mymasterKey...."
 
 
 ###Limitations:
