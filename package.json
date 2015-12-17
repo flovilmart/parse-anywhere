@@ -1,13 +1,13 @@
 {
   "name": "parse-anywhere",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Run parse cloud code anywhere",
   "main": "index.js",
   "preferGlobal": "true",
   "dependencies": {
     "forever-monitor": "~1.2.3",
     "rc": "~0.4.0",
-    "parse-cloud": "~0.0.3",
+    "parse-cloud": "~0.1.1",
     "parse-express-cookie-session": "~0.0.3",
     "parse-express-https-redirect": "~0.0.1",
     "parse-express-raw-body": "~0.0.1",
