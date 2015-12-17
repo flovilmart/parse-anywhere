@@ -1,7 +1,9 @@
-parse-develop
+parse-anywhere
 =========
 
-Develop your parse powered webapps locally
+formerly [parse-develop](https://github.com/flovilmart/parse-develop)
+
+Run your parse powered webapps anywhere
 
 ##Installation
 

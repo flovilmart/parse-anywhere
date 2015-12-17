@@ -1,7 +1,7 @@
 {
-  "name": "parse-server",
+  "name": "parse-anywhere",
   "version": "0.0.7",
-  "description": "A Parse Cloud local dev environment",
+  "description": "Run parse cloud code anywhere",
   "main": "index.js",
   "preferGlobal": "true",
   "dependencies": {
@@ -30,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:flovilmart/parse-server.git"
+    "url": "git@github.com:flovilmart/parse-anywhere.git"
   },
   "keywords": [
     "parse",
@@ -38,11 +38,12 @@
   ],
   "bin": {
     "parse-server": "./parse-server",
-    "parse-develop": "./parse-server"
+    "parse-develop": "./parse-server",
+    "parse-anywhere": "./parse-server"
   },
   "author": "Florent Vilmart",
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/flovilmart/parse-server/issues"
+    "url": "https://github.com/flovilmart/parse-anywhere/issues"
   }
 }
