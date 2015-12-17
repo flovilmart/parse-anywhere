@@ -1,5 +1,5 @@
 {
-  "name": "parse-develop",
+  "name": "parse-server",
   "version": "0.0.56.1",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
@@ -30,19 +30,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:flovilmart/parse-develop.git"
+    "url": "git@github.com:flovilmart/parse-server.git"
   },
   "keywords": [
     "parse",
     "cloud"
   ],
   "bin": {
-    "parse-develop": "./parse-develop",
-    "parsedev": "./parse-develop"
+    "parse-server": "./parse-server",
+    "parse-develop": "./parse-server"
   },
   "author": "Florent Vilmart",
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/flovilmart/parse-develop/issues"
+    "url": "https://github.com/flovilmart/parse-server/issues"
   }
 }

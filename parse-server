@@ -22,5 +22,5 @@ var options = (function(args) {
 })(pargs);
 
 var Server = require("./lib/ParseServer");
-var e = new Server(options.app);
+var e = new Server(options.app, options.path);
 e.start();
