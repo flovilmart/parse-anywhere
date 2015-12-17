@@ -1,6 +1,6 @@
 {
   "name": "parse-server",
-  "version": "0.0.56.1",
+  "version": "0.0.7",
   "description": "A Parse Cloud local dev environment",
   "main": "index.js",
   "preferGlobal": "true",
