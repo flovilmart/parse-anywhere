@@ -1,6 +1,6 @@
 {
   "name": "parse-anywhere",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Run parse cloud code anywhere",
   "main": "index.js",
   "preferGlobal": "true",
