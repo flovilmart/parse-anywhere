@@ -9,9 +9,12 @@ var pargs = process.argv.slice(2);
 var options = (function(args) {
     'use strict';
 
-    var r = {path: "./"};
+    var r = {path: "./", forever: true};
     while(args.length){
         var a = args.shift();
+        if (a.indexOf("--no-forever") > -1) {
+            r.forever = false;
+        }else 
         if (a.indexOf("/") > -1) {
             r.path = a;
         } else {
@@ -22,5 +25,5 @@ var options = (function(args) {
 })(pargs);
 
 var Server = require("./lib/ParseServer");
-var e = new Server(options.app, options.path);
+var e = new Server(options.app, options.path, options.forever);
 e.start();

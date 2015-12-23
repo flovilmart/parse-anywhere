@@ -5,68 +5,121 @@ formerly [parse-develop](https://github.com/flovilmart/parse-develop)
 
 Run your parse powered webapps anywhere
 
-##Installation
+## What does it do
 
-Install globally for availabilty system wide
+It create and managed a wrapped environment in node.js in order to emulate the cloud/ dependencies. You can now run all your parse code on any server.
 
-#####With npm
+It leverages [forever-monitor](https://npmjs.com/packages/forever-monitor) to spawn a child process and have a clean environment there.
+
+
+## Installation
+
+#### To run on a cloud service
+
+
+	npm install --save parse-anywhere
 	
-	npm install parse-develop -g
+in your `package.json` replace the npm start script:
 
-#####From source:
+```
+{
+	...
+	"scripts": {
+		"start": "parse-anywhere"
+	}
+	...
+}
+```
+
+
+
+#### With npm
+	
+	npm install parse-anywhere -g
+
+#### From source:
 
 clone the repo in your favorite place:
 
-	git clone git://github.com/flovilmart/parse-develop.git
-	cd parse-develop
+	git clone git://github.com/flovilmart/parse-anywhere.git
+	cd parse-anywhere
 	npm install -g
 	
 That will install the local parse environment wrapper in the parse-develop directory
 
-##Prepare your environment:
+##Prepare your configuration:
 
-export PARSE_JAVASCRIPT_KEY="myJSKey...."
-export PARSE_MASTER_KEY="mymasterKey...."
+Two options are possible in order to run it. 
+
+### Option 1
+
+
+```
+export PARSE_APPLICATION_ID=""
+export PARSE_JAVASCRIPT_KEY=""
+export PARSE_MASTER_KEY=""
+```
+
+With those 3 keys set, `parse-anywhere` will be able to run your project.
+
+Note that if all keys are found in the environment, the process will stop and we'll use those.
+
+
+### Option 2
+
+You can set your keys in the `.parse.local` file or the `config/global.json`
+
+Locate your configuration file and set the javascriptKey:
+
+```
+	{
+		"my_parse_app": {
+			"applicationId": "XXXXXXXXXXX",
+      		"javascriptKey": REPLACE_ME,
+      		"masterKey": "XXXXXXX","
+		}
+	}
+```
 
 
 ###Limitations:
-As you know, Parse provide hooks (beforeSave, afterSave, beforeDelete, afterDelete) and define functions. 
 
-Those functions have to be uploaded to the Parse servers using `parse deploy` or `parse develop`. 
-
-Updating those functions locally without publishing your code to parse have no effect!
+As of today, the cloud functions are not enabled yet, but that's in the plan since Parse just opened it in the form of webhooks. Sit tight, it's gonna be there soon.
 
 
+## How to use
 
-##How to use
+### From command line:
 
-From your parse cloud app folder, 
-instead of running `parse develop [app name]`, your can now run `parse-develop [app name]` or `parsedev [app name]`
+- From your parse app directory: 
 
-app name is optional
+	`parse-anywhere`
 
-Happy parsing!
+- If you have multiple apps in your config.json: 
 
-##Supported parse-provided cloud modules 
- 
-- applinks
-- mailgun
-- mandrill
-- sendgrid
-- stripe
-- parse-image
-- twilio
+	`parse-anywhere my_parse_app`
 
+- From any directory:
+
+	`parse-anywhere path/to/directory`
+	
 
 ##Custom Configuration
 
 
 Overriding the default configuration is at your own risks and may render your installation unstable, please use with care!
 
+Environment:
+
+	export PORT=8080 // set the port for the http server
 
 It is possible to change the behavior of forever monitor through a rc file (we use the rc module).
 
-The appname for rc is `parsedev`
+To further configure, create a `.parse-anywhererc` or  file in your root project directory (replace my_app by the name of your app) 
+
+Note: if you override the port in the RC configuration, the environment variable will be ignored.
+
+From there, you can configure pretty much everything in forever monitor 
 
 Visit [RC Standards](https://github.com/dominictarr/rc#standards) for more informations
 
@@ -84,10 +137,8 @@ The default options for are:
 
 	{
 		// Forever monitor options
-    	max: 1,
     	command: "node",
     	spawnWith: {
-     		customFds: [-1, -1, -1], // that forever spawns.
       		setsid: false
     	},
     	watch:true,
@@ -95,8 +146,24 @@ The default options for are:
     	spinSleepTime: 500,
     	
     	// expressjs port
-    	port: 3000
+    	port: 8080 || process.env.PORT
   	}
+
+
+
+## Supported parse-provided cloud modules 
+ 
+- [applinks](https://github.com/flovilmart/applinks-metatag) 
+- [mailgun](https://github.com/flovilmart/parse-mailgun/tree/0.0.2-parse)
+- [mandrill](https://github.com/flovilmart/parse-mandrill/tree/0.0.1-parse)
+- [sendgrid](https://github.com/flovilmart/parse-sendgrid/tree/0.0.1-parse)
+- [stripe](https://github.com/flovilmart/parse-stripe/tree/2.5.0-parse)
+- [parse-image](https://github.com/flovilmart/parse-image)
+- twilio
+- [express](https://github.com/flovilmart/express/tree/3.1.0-parse)
+
+
+All implementations match 100% what's available on CloudCode
 
 ##Change Log
 
