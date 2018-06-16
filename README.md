@@ -82,7 +82,7 @@ Locate your configuration file and set the javascriptKey:
 ```
 
 
-###Limitations:
+### Limitations:
 
 As of today, the cloud functions are not enabled yet, but that's in the plan since Parse just opened it in the form of webhooks. Sit tight, it's gonna be there soon.
 
@@ -104,7 +104,7 @@ As of today, the cloud functions are not enabled yet, but that's in the plan sin
 	`parse-anywhere path/to/directory`
 	
 
-##Custom Configuration
+## Custom Configuration
 
 
 Overriding the default configuration is at your own risks and may render your installation unstable, please use with care!
@@ -167,7 +167,7 @@ All implementations match 100% what's available on CloudCode
 
 ##Change Log
 
-#####0.0.50
+##### 0.0.50
 Adds support for all Parse Cloud modules provided by parse
 
 Base modules
@@ -195,25 +195,25 @@ Removes necessity to pass a port to `app.listen`
 Removes necessity to add your public cloud directory
 
 
-#####0.0.32
+##### 0.0.32
 
 Adds mailgun and mandrill cloud modules
 
-#####0.0.31
+##### 0.0.31
 
 Adds applinks-metatag module for [AppLinks](https://www.parse.com/docs/cloud_modules_guide#applinks)
 
 Use require for synchronous configuration reading
 
 
-#####0.0.30
+##### 0.0.30
 
 Changes to forever-monitor (recommended behavior)
 Adds parsedev command (for simplicity sake)
 Adds configuration for forever-monitor with rc (appname is parsedev)
 
 
-#####0.0.20
+##### 0.0.20
 Add Windows Support!
 
 Fixes crazy restart loops when addr in use
@@ -221,33 +221,33 @@ Fixes crazy restart loops when addr in use
 Improves overall performance
 
 
-#####0.0.15
+##### 0.0.15
 Removes dependency on parse
 
 Adds dependency on parse-cloud-additions
 
 Improves path handling for non *NIX machines
 
-#####0.0.13
+##### 0.0.13
 Adds prefer global directive
 
 Removes unused code
 
 
-#####0.0.12
+##### 0.0.12
 Reverts parse-stripe dependency to full git url
 
 Adds which as a dependency for forever full path
 
 
-#####0.0.11
+##### 0.0.11
 Set the DEBUG environment variable to start the process node --debug so you can
 use node-inspector or any other debugger!
 
 Displays the PID upon launch
 
 
-#####0.0.10
+##### 0.0.10
 Improves forever restarting craziness
 
 Adds sanity check of the configuration file before starting forever
@@ -258,25 +258,25 @@ Improves reliability
 folder
 
 
-#####0.0.9:
+##### 0.0.9:
 Adds npm for all parse-* modules instead of git
 
 Moves stripe-node fork to flovilmart/parse-stripe
 
-#####0.0.8:
+##### 0.0.8:
 Adds npm for parse-image instead of git
 
-#####0.0.5:
+##### 0.0.5:
 Changes for NPM to parse-develop
 
-#####0.0.4:
+##### 0.0.4:
 Adds support for parse-image
 
-#####0.0.2:
+##### 0.0.2:
 
 Ability to install system wide
 
-#####0.0.1:
+##### 0.0.1:
 
 Proof of concept
 
